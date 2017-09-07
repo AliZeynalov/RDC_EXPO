@@ -24,6 +24,12 @@ export default class MapPage extends Component {
      this.setState({mapLoaded: true});
  }
 
+ navigateBack()
+ {
+     console.log("navigatoBack function");
+     this.props.navigator.pop();
+ }
+
  componentWillMount()
  {
 
@@ -75,7 +81,9 @@ render()
 
     return(
         <View style={{flex: 1}}>
-
+            <TouchableOpacity onPress={()=>this.navigateBack()} style={{paddingLeft: 5, marginTop: 15}}>
+                <Ionicons name="ios-arrow-back" size={32} color="green" />
+            </TouchableOpacity>
             <MapView style={{flex: 1}}
                 loadingEnabled={true}
                 region={this.state.region}

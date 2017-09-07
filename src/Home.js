@@ -62,7 +62,7 @@ export default class Home extends Component {
         return fetch(Url, {method: "GET"})
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log("GIRDI");
+
                 this.setState({dataSource: this.getDataSource(responseJson)},()=>console.log("user state",this.state.dataSource));
             })
             .done();
