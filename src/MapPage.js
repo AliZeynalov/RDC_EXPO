@@ -4,6 +4,7 @@
 import React, {Component} from 'react';
 import {ListView, TextInput, View, Image, Platform, TouchableOpacity, ScrollView, StyleSheet,Animated,Alert,ActivityIndicator,AsyncStorage,Dimensions,Text} from 'react-native';
 import {MapView} from 'expo';
+import {Container, Form, H3, Footer, Header, Icon, Content, Body, FooterTab,  Left, Right, Button, Input, Item, Spinner, CardItem, Thumbnail} from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 export default class MapPage extends Component {
 
@@ -66,6 +67,33 @@ export default class MapPage extends Component {
 
 render()
 {
+    const styles = {
+        header: {
+            backgroundColor: '#524656',
+            marginBottom: 10
+        },
+        footer: {
+            flexDirection: 'column',
+            height: 40
+        },
+        button: {
+            alignSelf: 'flex-end',
+            backgroundColor: '#eb7b59',
+            width: 111,
+            height: 33,
+            justifyContent: 'center',
+            padding: 0,
+            margin: 0,
+        },
+        text: {
+            padding: 0,
+            margin: 0,
+        }
+    };
+
+
+
+
     // var lat = this.props.location[0];
     // var long = this.props.location[1];
     console.log("lat long: ", this.props.location);
@@ -80,11 +108,19 @@ render()
     }
 
     return(
-        <View style={{flex: 1}}>
-            <TouchableOpacity onPress={()=>this.navigateBack()} style={{paddingLeft: 5, marginTop: 15}}>
-                <Ionicons name="ios-arrow-back" size={32} color="green" />
-            </TouchableOpacity>
-            <MapView style={{flex: 1}}
+        <Container style={{flex: 1}}>
+            <Header style={{"backgroundColor": '#524656',elevation: 0, marginBottom: 0}}>
+                <Left style={{flex: 1}}>
+                    <Button transparent
+                            onPress={()=>this.navigateBack()}>
+                        <Icon name="ios-arrow-round-back" style={{color: '#E5DDCB'}}></Icon>
+                    </Button>
+                </Left>
+                <Body style={{flex: 12}}>
+                    <Text style={{letterSpacing: 0.5,color: '#E5DDCB'}}>RDC Partner</Text>
+                </Body>
+            </Header>
+            <MapView style={{flex: 1, justifyContent: 'space-between'}}
                 loadingEnabled={true}
                 region={this.state.region}
                 onRegionChangeComplete={this.onRegionChangeComplete}>
@@ -92,16 +128,31 @@ render()
                <MapView.Marker
                     coordinate={{latitude: this.props.user_location[0], longitude: this.props.user_location[1]}}
                     title={this.props.user_name}
-                    description={this.props.user_desc}
-               />
+                    description={this.props.user_desc}>
+                    <View>
+                        <Text><Thumbnail source={{uri: this.props.user_photo}} /></Text>
+                    </View>
+               </MapView.Marker>
+
             </MapView>
-            <TouchableOpacity onPress={()=>this.onPressZoomIn()}>
-                <Text>Zoom In</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={()=>this.onPressZoomOut()}>
-                    <Text>Zoom Out</Text>
-            </TouchableOpacity>
-        </View>
+
+            <Footer style={styles.footer}>
+
+                <FooterTab style={{backgroundColor: '#524656', flex: 56, paddingLeft: 12, paddingRight: 12}}>
+                    <Left>
+                        <Button transparent onPress={()=>this.onPressZoomIn()}>
+                        <Icon name="md-add" style={{color: '#FFFF'}}/>
+                        </Button>
+                    </Left>
+
+                    <Right>
+                        <Button transparent onPress={()=>this.onPressZoomOut()}>
+                            <Icon name="md-remove" style={{color: "#FFFF"}}/>
+                        </Button>
+                    </Right>
+                </FooterTab>
+            </Footer>
+        </Container>
     );
 }
 
