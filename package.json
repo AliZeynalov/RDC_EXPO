@@ -4,7 +4,7 @@
   "description": "Hello Expo!",
   "author": null,
   "private": true,
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "./AppEntry",
   "dependencies": {
     "@expo/vector-icons": "^5.2.0",
     "expo": "^20.0.0",
