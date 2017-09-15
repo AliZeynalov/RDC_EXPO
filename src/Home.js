@@ -22,6 +22,8 @@ export default class Home extends Component {
 
     navigateTo(user)
     {
+        console.log("USER -> PROPS: ", user)
+
         this.props.navigator.push({
             component: MapPage,
             title: '',

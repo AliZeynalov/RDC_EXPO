@@ -12,8 +12,8 @@ export default class MapPage extends Component {
     state = {
         mapLoaded: false,
         region: {
-            latitude: 50.18825,
-            longitude: -122.6324,
+            latitude: this.props.user_location[0],
+            longitude: this.props.user_location[1],
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421
         }
@@ -61,12 +61,17 @@ export default class MapPage extends Component {
 
 
  onRegionChangeComplete = (region) => {
+        console.log("REGION: ", region);
         this.setState({region});
  }
 
 
 render()
 {
+    const LATITUDE_DELTA = 0.0922;
+    const LONGITUDE_DELTA = 0.0421;
+
+
     const styles = {
         header: {
             backgroundColor: '#524656',
